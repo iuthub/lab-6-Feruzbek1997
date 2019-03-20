@@ -1,162 +1,73 @@
+<?php
+include('connection.php');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Validating Forms</title>
+		<title>My Personal Page</title>
 		<link href="style.css" type="text/css" rel="stylesheet" />
 	</head>
-	<body>
-	<?php if($_SERVER["REQUEST_METHOD"]=="GET") { ?>
-		<h1>Registration Form</h1>
-		<hr />
-		
-		<h2>Please, fill below fields correctly</h2>
-		<form action="index.php" method="post">
-			<dl>
-				<dt>Name</dt>
-				<dd>
-					<input type="text" name="name"  />
-				</dd>
-
-				<dt>Email</dt>
-				<dd>
-					<input type="text" name="email" >
-				</dd>
-
-				<dt>Username</dt>
-				<dd>
-					<input type="text" name="user" >
-				</dd>
-
-				<dt>Password</dt>
-				<dd>
-					<input type="text" name="pass" >
-				</dd>
-
-				<dt>Confirm Password</dt>
-				<dd>
-					<input type="text" name="pass_conf" >
-				</dd>
-
-				<dt>Date of Birth</dt>
-				<dd>
-					<input type="text" name="date">
-				</dd>
-
-				<dt>Gender</dt>
-				<dd>
-					<select name="gender" >
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
-				</dd>
-
-				<dt>Marital Status</dt>
-				<dd>
-					<select name="status" >
-						<option value="single">Single</option>
-						<option value="married">Married</option>
-						<option value="widowed">Widowed</option>
-						<option value="divorced">Divorced</option>					
-					</select>
-				</dd>
-
-				<dt>Address</dt>
-				<dd>
-					<input type="text" name="address"  />
-				</dd>
-
-				<dt>City</dt>
-				<dd>
-					<input type="text" name="city"  />
-				</dd>
-
-				<dt>Postal code</dt>
-				<dd>
-					<input type="number" name="p_code"  />
-				</dd>
-
-				<dt>Home number</dt>
-				<dd>
-					<input type="number" name="h_number"  />
-				</dd>
-
-				<dt>Mobile number</dt>
-				<dd>
-					<input type="number" name="m_number"  />
-				</dd>
-
-				<dt>Credit card number</dt>
-				<dd>
-					<input type="number" name="credit"  />
-				</dd>
-
-				<dt>Credit card Expiry Date</dt>
-				<dd>
-					<input type="text" name="expiry"  />
-				</dd>
-
-				<dt>Monthly Salary</dt>
-				<dd>
-					<input type="text" name="salary"  />
-				</dd>
-
-				<dt>Web Site URL</dt>
-				<dd>
-					<input type="url" name="url"  />
-				</dd>
-
-				<dt>Overall GPA</dt>
-				<dd>
-					<input type="text" name="gpa"  />
-				</dd>
-				<br />
-				<div>
-					<input type="submit" value="Sign up!">
-				</div>
-			</dl>
-		</form>
-	<?php } else {
-		$name = $_POST["name"];
-		$email = $_POST["email"];
-		$user = $_POST["user"];
-		$pass = $_POST["pass"];
-		$pass2 = $_POST["pass_conf"];
-		$date = $_POST["date"];
-		$gender = $_POST["gender"];
-		$status = $_POST["status"];
-		$address = $_POST["address"];
-		$city = $_POST["city"];
-		$postal = $_POST["p_code"];
-		$home = $_POST["h_number"];
-		$mobile = $_POST["m_number"];
-		$credit = $_POST["credit"];
-		$expiry = $_POST["expiry"];
-		$salary = $_POST["salary"];
-		$url = $_POST["url"];
-		$gpa = $_POST["gpa"];
-		$res = "Validation error";
 	
-		if (preg_match("/^[[:alpha:]]{2,}$/i", $name)) 																							
-		if (preg_match("/^[[:alnum:]]+@[[:alnum:]]+\.[[:alpha:]]{1,3}$/i", $email)) 
-		if (preg_match("/^.{5,}$/i", $user)) 
-		if (preg_match("/^(?=\w{6,10}$)(?=[^a-z]*[a-z])(?=(?:[^A-Z]*[A-Z]){3})(?=\D*\d)/i", $pass))
-		if ($pass == $pass2)
-		if (preg_match("/^\d{2}\.\d{2}\.\d{4}$/i", $date))
-		if (preg_match("/^(Male|Female)$/i", $gender))
-		if (preg_match("/^(Single|Married|Divorced|Widowed)$/i", $status))
-		if (preg_match("/^.+$/i", $address)) 
-		if (preg_match("/^[[:alpha:]]+$/i", $city)) 
-		if (preg_match("/^[0-9]{6}$/i", $postal)) 
-		if (preg_match("/^[0-9]{9}$/i", $mobile))
-		if (preg_match("/^[0-9]{9}$/i", $home))
-		if (preg_match("/^[0-9]{16}$/i", $credit))
-		if (preg_match("/^\d{2}\.\d{2}\.\d{4}$/i", $expiry)) 
-		if (preg_match("/^UZS( +|)[\d,\.]+$/i", $salary)) 
-		if (preg_match("/^(http|https):\/\/(www|).+$/i", $url)) 
-		if (preg_match("/^([0-3]{1}(\.[0-9]{1,2}|)|4(\.[0-5]{1}[0-9]{0,1}|))$/i", $gpa))
-			$res = "Thank you for registration!";
-	?>
-		<h1><?=$res?></h1>
-	<?php } ?>
+	<body>
+		<?php include('header.php'); ?>
+		<!-- Show this part if user is not signed in yet -->
+		<div class="twocols">
+			<form action="index.php" method="post" class="twocols_col">
+				<ul class="form">
+					<li>
+						<label for="username">Username</label>
+						<input type="text" name="username" id="username" />
+					</li>
+					<li>
+						<label for="pwd">Password</label>
+						<input type="password" name="pwd" id="pwd" />
+					</li>
+					<li>
+						<label for="remember">Remember Me</label>
+						<input type="checkbox" name="remember" id="remember" checked />
+					</li>
+					<li>
+						<input type="submit" value="Submit" /> &nbsp; Not registered? <a href="register.php">Register</a>
+					</li>
+				</ul>
+			</form>
+			<div class="twocols_col">
+				<h2>About Us</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur libero nostrum consequatur dolor. Nesciunt eos dolorem enim accusantium libero impedit ipsa perspiciatis vel dolore reiciendis ratione quam, non sequi sit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nobis vero ullam quae. Repellendus dolores quis tenetur enim distinctio, optio vero, cupiditate commodi eligendi similique laboriosam maxime corporis quasi labore!</p>
+			</div>
+		</div>
+		
+		<!-- Show this part after user signed in successfully -->
+		<div class="logout_panel"><a href="register.php">My Profile</a>&nbsp;|&nbsp;<a href="index.php?logout=1">Log Out</a></div>
+		<h2>New Post</h2>
+		<form action="index.php" method="post">
+			<ul class="form">
+				<li>
+					<label for="title">Title</label>
+					<input type="text" name="title" id="title" />
+				</li>
+				<li>
+					<label for="body">Body</label>
+					<textarea name="body" id="body" cols="30" rows="10"></textarea>
+				</li>
+				<li>
+					<input type="submit" value="Post" />
+				</li>
+			</ul>
+		</form>
+		<div class="onecol">
+			<div class="card">
+				<h2>TITLE HEADING</h2>
+				<h5>Author, Sep 2, 2017</h5>
+				<p>Some text..</p>
+				<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+			</div>
+			<div class="card">
+				<h2>TITLE HEADING</h2>
+				<h5>Author, Sep 2, 2017</h5>
+				<p>Some text..</p>
+				<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+			</div>
+		</div>
 	</body>
 </html>
